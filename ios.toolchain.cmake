@@ -200,11 +200,15 @@ if (NOT DEFINED ENABLE_VISIBILITY)
   set(ENABLE_VISIBILITY FALSE CACHE BOOL "Whether or not to hide symbols (-fvisibility=hidden)")
   message(STATUS "Hiding symbols visibility by default. ENABLE_VISIBILITY not provided!")
 endif()
+
 # Get the SDK version information.
-execute_process(COMMAND xcodebuild -sdk ${CMAKE_OSX_SYSROOT} -version SDKVersion
-  OUTPUT_VARIABLE IOS_SDK_VERSION
-  ERROR_QUIET
-  OUTPUT_STRIP_TRAILING_WHITESPACE)
+if (NOT DEFINED IOS_SDK_VERSION)
+  execute_process(COMMAND xcodebuild -sdk ${CMAKE_OSX_SYSROOT} -version SDKVersion
+    OUTPUT_VARIABLE IOS_SDK_VERSION
+    ERROR_QUIET
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+endif()
+
 # Find the Developer root for the specific iOS platform being compiled for
 # from CMAKE_OSX_SYSROOT.  Should be ../../ from SDK specified in
 # CMAKE_OSX_SYSROOT.  There does not appear to be a direct way to obtain
