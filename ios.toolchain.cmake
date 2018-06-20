@@ -206,12 +206,10 @@ if (NOT DEFINED ENABLE_VISIBILITY)
 endif()
 
 # Get the SDK version information.
-if (NOT DEFINED IOS_SDK_VERSION)
-  execute_process(COMMAND xcodebuild -sdk ${CMAKE_OSX_SYSROOT} -version SDKVersion
-    OUTPUT_VARIABLE IOS_SDK_VERSION
-    ERROR_QUIET
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-endif()
+execute_process(COMMAND xcodebuild -sdk ${CMAKE_OSX_SYSROOT} -version SDKVersion
+  OUTPUT_VARIABLE IOS_SDK_VERSION
+  ERROR_QUIET
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 # Find the Developer root for the specific iOS platform being compiled for
 # from CMAKE_OSX_SYSROOT.  Should be ../../ from SDK specified in
